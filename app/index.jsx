@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity, FlatList, useWindowDimensions } from 'react-native';
+import { Text, View, TouchableOpacity, FlatList, useWindowDimensions, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
-  const { width } = useWindowDimensions(); // Storing width as a constant
+  const { width, height } = useWindowDimensions();
 
   const data = [
     { id: 1, text1: "Find your dream Washer with us 👍", text2: "Search among millions of professionals and find your perfect match here." },
@@ -35,41 +35,47 @@ export default function App() {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' }}>
-      <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ width: '100%', height: '80%', backgroundColor: '#CCCCCC', borderRadius: 20 }} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ height: '50%', justifyContent: 'center', alignItems: 'center' }}>
+        <Image 
+          source={{ uri: 'https://your-image-url.com' }} 
+          style={{ width: '100%', height: '100%' }} 
+          resizeMode="cover"
+        />
       </View>
-      <FlatList
-        data={data}
-        renderItem={renderText}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={onScroll}
-        getItemLayout={getItemLayout}
-        bounces={false}
-      />
-      <View style={{ flexDirection: 'row', marginVertical: 20 }} pointerEvents="none">
-        {data.map((_, index) => (
-          <View
-            key={index}
-            style={{
-              height: 8,
-              width: 8,
-              borderRadius: 4,
-              marginHorizontal: 4,
-              backgroundColor: currentIndex === index ? '#FF3B30' : '#CCCCCC',
-            }}
-          />
-        ))}
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <FlatList
+          data={data}
+          renderItem={renderText}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onScroll={onScroll}
+          getItemLayout={getItemLayout}
+          bounces={false}
+        />
+        <View style={{ flexDirection: 'row', marginVertical: 20 }} pointerEvents="none">
+          {data.map((_, index) => (
+            <View
+              key={index}
+              style={{
+                height: 8,
+                width: 8,
+                borderRadius: 4,
+                marginHorizontal: 4,
+                backgroundColor: currentIndex === index ? '#FF3B30' : '#CCCCCC',
+              }}
+            />
+          ))}
+        </View>
+        <TouchableOpacity
+          style={{ backgroundColor: '#007BFF', paddingVertical: 16, paddingHorizontal: 40, borderRadius: 30, marginBottom: 16 }}
+          onPress={() => router.push('/loginScreen3')}
+        >
+          <Text style={{ color: 'white', fontSize: 16 }}>Let's Go</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={{ backgroundColor: '#007BFF', paddingVertical: 16, paddingHorizontal: 40, borderRadius: 30, marginBottom: 16 }}
-        onPress={() => router.push('/loginScreen3')}
-      >
-        <Text style={{ color: 'white', fontSize: 16 }}>Let's Go</Text>
-      </TouchableOpacity>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
