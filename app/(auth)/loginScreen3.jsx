@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView,View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import Checkbox from 'expo-checkbox'; // For the checkbox
 import { FontAwesome } from '@expo/vector-icons'; // For icons like email, password visibility, etc.
 import { useRouter } from 'expo-router';
@@ -12,7 +12,7 @@ export default function loginScreen3() {
   const router = useRouter();
 
   return (
-    <View className="flex-1 bg-white px-6 pt-10">
+    <SafeAreaView className="flex-1 bg-white px-6 pt-10">
       {/* Circle shape in the top right */}
       <View className="absolute top-[-20] right-[-40] w-40 h-40 rounded-full border-2 border-gray-200" />
 
@@ -93,9 +93,9 @@ export default function loginScreen3() {
       <TouchableOpacity className="mt-6">
         <Text className="text-center text-gray-600">
           Don’t Have an Account?{' '}
-          <Text className="text-blue-500 font-semibold">Sign Up</Text>
+          <Text className="text-blue-500 font-semibold" onPress={() => router.push('/loginScreen2')}>Sign Up</Text>
         </Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
