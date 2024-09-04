@@ -13,6 +13,7 @@
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/stack": "^6.4.1",
     "@stripe/stripe-react-native": "^0.38.4",
+    "axios": "^1.7.7",
     "expo": "~51.0.28",
     "expo-apple-authentication": "~6.4.2",
     "expo-auth-session": "~5.5.2",
