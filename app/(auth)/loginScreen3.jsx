@@ -21,7 +21,7 @@ export default function loginScreen3() {
       <Text className="text-gray-400 text-xl text-center mt-2">Sign in to continue</Text>
 
       {/* Email Input */}
-      <View className="mt-10">
+      <View className="mt-10 px-4">
         <View className="flex-row items-center border-2 border-gray-200 rounded-xl mb-3 px-3 py-2">
           <FontAwesome name="envelope" size={20} color="gray" />
           <TextInput
@@ -36,7 +36,7 @@ export default function loginScreen3() {
       </View>
 
       {/* Password Input */}
-      <View className="mt-5 mb-7">
+      <View className="mt-5 mb-7 px-4">
         <View className="flex-row items-center border-2 border-gray-200 rounded-xl px-3 py-2">
           <FontAwesome name="lock" size={20} color="gray" />
           <TextInput
@@ -54,7 +54,7 @@ export default function loginScreen3() {
       </View>
 
       {/* Remember Me & Forgot Password */}
-      <View className="flex-row items-center justify-between mb-5">
+      <View className="flex-row items-center justify-between mb-5 px-6">
         <View className="flex-row items-center">
           <Checkbox
             value={rememberMe}
@@ -70,15 +70,19 @@ export default function loginScreen3() {
       </View>
 
       {/* Sign In Button */}
-      <TouchableOpacity className="bg-blue-500 py-4 rounded-xl mt-6">
+      <TouchableOpacity className="bg-[#2663FF] py-4 rounded-xl mt-6 mx-4">
         <Text className="text-white text-center font-bold text-lg">Sign In</Text>
       </TouchableOpacity>
 
       {/* Or Continue with */}
-      <Text className="text-center text-gray-500 mt-6">Or Continue with</Text>
+      <View className="flex-row items-center mt-6 px-4">
+        <View className="flex-1 h-[1px] bg-gray-300" />
+        <Text className="text-center text-gray-500 mx-4">Or Continue with</Text>
+        <View className="flex-1 h-[1px] bg-gray-300" />
+      </View>
       
       {/* Social Login Buttons */}
-      <View className="flex-row justify-center mt-6">
+      <View className="flex-row justify-center mt-6 px-4">
         <TouchableOpacity className="bg-red-500 flex-1 flex-row justify-center items-center p-3 rounded-lg mx-2">
           <FontAwesome name="google" size={24} color="white" />
           <Text className="text-white ml-4">Google</Text>
