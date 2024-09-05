@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, TextInput, TouchableOpacity } from 'react-nat
 import { Picker } from '@react-native-picker/picker';
 import CheckBox from 'expo-checkbox';
 import { FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
 export default function SignUpScreen() {
@@ -20,7 +21,12 @@ export default function SignUpScreen() {
       <View className="absolute top-[-20] right-[-40] w-40 h-40 rounded-full border-2 border-gray-200" />
 
       {/* Sign Up text */}
-      <Text className="text-4xl text-center text-[#1C2D57] font-semibold mt-20">Sign Up</Text>
+      <View className="flex-row items-center pt-8 mt-4 mb-8">
+          <TouchableOpacity>
+            <Feather name="arrow-left" size={24} color="black" onPress={() => router.back()}/>
+          </TouchableOpacity>
+          <Text className="flex-1 text-4xl text-center text-[#1C2D57] font-semibold">Sign Up</Text>
+        </View>
 
       {/* Username Input */}
       <View className="mt-20">
@@ -107,7 +113,7 @@ export default function SignUpScreen() {
 
       {/* Register Button */}
       <TouchableOpacity className="bg-blue-500 py-4 rounded-xl mt-20">
-        <Text className="text-white text-center font-bold text-lg" onPress={() => router.push('/loginScreen2')}>Register</Text>
+        <Text className="text-white text-center font-bold text-lg" onPress={() => router.push('/loginScreen7')}>Register</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

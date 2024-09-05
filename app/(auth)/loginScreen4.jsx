@@ -1,93 +1,135 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, AppState } from 'react-native';
+import * as BackgroundFetch from 'expo-background-fetch';
+import * as TaskManager from 'expo-task-manager';
+import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import illustration_icon from '../../assets/images/Illustration_icon.png';
 
-const LoginScreen4 = () => {
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
+const BACKGROUND_FETCH_TASK = 'background-fetch-task';
+
+TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
+  // Fetch or update data here
+  // Be sure to return BackgroundFetch.Result.NewData if there's new data
+  return BackgroundFetch.Result.NewData;
+});
+
+const EmailVerificationScreen = () => {
+  const [code, setCode] = useState(['', '', '', '']);
   const [timer, setTimer] = useState(60);
-  const [isCodeSent, setIsCodeSent] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    let interval;
-    if (isCodeSent && timer > 0) {
-      interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer - 1);
-      }, 1000);
-    } else if (timer === 0) {
+    registerBackgroundFetch();
+    const interval = setInterval(decrementTimer, 1000);
+
+    return () => {
       clearInterval(interval);
+      unregisterBackgroundFetch();
+    };
+  }, []);
+
+  const registerBackgroundFetch = async () => {
+    try {
+      await BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
+        minimumInterval: 1, // 1 second
+        stopOnTerminate: false,
+        startOnBoot: true,
+      });
+    } catch (err) {
+      console.log("Task Register failed:", err);
     }
-    return () => clearInterval(interval);
-  }, [isCodeSent, timer]);
-
-  const sendVerificationCode = () => {
-    // Logic to send verification code via email
-    setIsCodeSent(true);
-    setTimer(60);
   };
 
-  const resendVerificationCode = () => {
-    // Logic to resend verification code via email
-    setTimer(60);
+  const unregisterBackgroundFetch = async () => {
+    try {
+      await BackgroundFetch.unregisterTaskAsync(BACKGROUND_FETCH_TASK);
+    } catch (err) {
+      console.log("Task Unregister failed:", err);
+    }
   };
 
-  const validateCode = () => {
-    // Logic to validate the verification code
+  const decrementTimer = () => {
+    setTimer((prevTimer) => {
+      if (prevTimer > 0) {
+        return prevTimer - 1;
+      } else {
+        return 0;
+      }
+    });
+  };
+
+  const handleInputChange = (text, index) => {
+    const newCode = [...code];
+    newCode[index] = text;
+    setCode(newCode);
+  };
+
+  const handleResendCode = () => {
+    setTimer(60);
+    // Logic to resend the code
+  };
+
+  const handleVerify = () => {
+    if (code.includes('')) {
+      alert('Please enter the full code.');
+      return;
+    }
+    alert('Code verified successfully!');
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: 'https://example.com/your-image.jpg' }} style={styles.image} />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        value={phone}
-        onChangeText={setPhone}
-      />
-      <Button title="Send Verification Code" onPress={sendVerificationCode} />
-      {isCodeSent && (
-        <>
+    <View className="flex-1 bg-white px-6 py-8">
+      {/* Header */}
+      <View className="flex-row items-center pt-8 mt-4 mb-6">
+        <TouchableOpacity>
+          <Feather name="arrow-left" size={24} color="black" onPress={() => router.back()}/>
+        </TouchableOpacity>
+        <Text className="flex-1 text-center text-lg font-semibold text-black">Check your email</Text>
+      </View>
+
+      {/* Subtitle */}
+      <Text className="text-center text-gray-500 mb-8">
+        We've sent the code to the email on your device
+      </Text>
+
+      {/* Image */}
+      <View className="items-center mb-8">
+        <Image
+          source= {illustration_icon} // Replace with your image URL
+          className="w-32 h-32"
+        />
+      </View>
+
+      {/* Code Input */}
+      <View className="flex-row justify-between mx-auto w-3/4 mb-4">
+        {code.map((digit, index) => (
           <TextInput
-            style={styles.input}
-            placeholder="Enter Verification Code"
-            value={verificationCode}
-            onChangeText={setVerificationCode}
+            key={index}
+            className="w-12 h-12 border-b-2 border-blue-500 text-center text-lg"
+            maxLength={1}
+            keyboardType="number-pad"
+            value={digit}
+            onChangeText={(text) => handleInputChange(text, index)}
           />
-          <Button title="Validate Code" onPress={validateCode} />
-          <Text>Time remaining: {timer} seconds</Text>
-          {timer === 0 && <Button title="Resend Code" onPress={resendVerificationCode} />}
-        </>
-      )}
+        ))}
+      </View>
+
+      {/* Timer and Resend Code */}
+      <View className="flex-row justify-center items-center mb-8">
+        <Text className="text-gray-400">Code expires in :</Text>
+        <Text className="text-blue-500 ml-1">{`00 : ${timer < 10 ? `0${timer}` : timer}`}</Text>
+      </View>
+      <TouchableOpacity onPress={handleResendCode}>
+        <Text className="text-center text-blue-500 mb-8">Didn’t receive code? Resend Code</Text>
+      </TouchableOpacity>
+
+      {/* Verify Button */}
+      <TouchableOpacity className="bg-blue-500 py-4 rounded-full items-center" onPress={handleVerify}>
+        <Text className="text-white font-semibold">Verify</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  image: {
-    width: 200,
-    height: 200,
-    marginBottom: 16,
-  },
-  input: {
-    width: '100%',
-    padding: 8,
-    marginVertical: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-  },
-});
-
-export default LoginScreen4;
+export default EmailVerificationScreen;
