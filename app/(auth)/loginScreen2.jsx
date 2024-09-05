@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAReaView, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import Checkbox from 'expo-checkbox'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { useRouter } from 'expo-router';
@@ -56,7 +56,7 @@ export default function loginScreen2() {
       </View>
 
       <TouchableOpacity className="bg-blue-500 py-4 rounded-xl mt-20">
-        <Text className="text-white text-center font-bold text-lg">Sign Up</Text>
+        <Text className="text-white text-center font-bold text-lg" onPress={() => router.push('/loginScreen8')}>Sign Up</Text>
       </TouchableOpacity>
       
     </SafeAreaView>
