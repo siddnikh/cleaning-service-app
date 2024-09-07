@@ -22,6 +22,7 @@
     "expo-checkbox": "^3.0.0",
     "expo-facebook": "^12.2.0",
     "expo-image-picker": "^15.0.7",
+    "expo-location": "^17.0.1",
     "expo-router": "^3.5.23",
     "expo-status-bar": "~1.12.1",
     "nativewind": "^2.0.11",

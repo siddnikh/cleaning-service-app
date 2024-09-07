@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, TextInput, TouchableOpacity, Image } from 're
 import Checkbox from 'expo-checkbox'; 
 import { FontAwesome } from '@expo/vector-icons'; 
 import { useRouter } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 export default function loginScreen2() {
   const [email, setEmail] = useState('');
@@ -11,11 +12,17 @@ export default function loginScreen2() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex-1 bg-white px-6 pt-10">
+    <SafeAreaView className="flex-1">
+      <View className='bg-white px-6 pt-10'>
       {/* Circle shape in the top right */}
       <View className="absolute top-[-20] right-[-40] w-40 h-40 rounded-full border-2 border-gray-200" />
 
       {/* Sign Up text */}
+      <View className="flex-row items-center pt-8 mt-4">
+          <TouchableOpacity>
+            <Feather name="arrow-left" size={24} color="black" onPress={() => router.back()}/>
+          </TouchableOpacity>
+        </View>
       <Text className="text-2xl text-left text-[#393F45] mt-40">Sign Up</Text>
       <Text className="text-4xl font-bold text-left text-[#393F45] mt-4">Account</Text>
       <Text className="text-lg text-left text-gray-300 mt-4">Sign in with your account to continue!</Text>
@@ -58,6 +65,7 @@ export default function loginScreen2() {
       <TouchableOpacity className="bg-blue-500 py-4 rounded-xl mt-20">
         <Text className="text-white text-center font-bold text-lg" onPress={() => router.push('/loginScreen8')}>Sign Up</Text>
       </TouchableOpacity>
+      </View>
       
     </SafeAreaView>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert, StatusBar } from 'react-native';
 import CheckBox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -30,31 +30,31 @@ const ProfileConfirmationScreen = () => {
   };
 
   const handleVerify = () => {
-    const phoneRegex = /^\+\d{1,3}\d{10}$/; // Regex to check for country code and 10 digit number
+    // const phoneRegex = /^\+\d{1,3}\d{10}$/; // Regex to check for country code and 10 digit number
 
-    if (!username || !email || !phone) {
-      Alert.alert('Error', 'Please fill in all required fields.');
-      return;
-    }
+    // if (!username || !email || !phone) {
+    //   Alert.alert('Error', 'Please fill in all required fields.');
+    //   return;
+    // }
 
-    if (!phoneRegex.test(phone)) {
-      Alert.alert('Error', 'Please enter a valid phone number with country code.');
-      return;
-    }
+    // if (!phoneRegex.test(phone)) {
+    //   Alert.alert('Error', 'Please enter a valid phone number with country code.');
+    //   return;
+    // }
 
-    if (!agree) {
-      Alert.alert('Error', 'You must agree to the terms and conditions.');
-      return;
-    }
+    // if (!agree) {
+    //   Alert.alert('Error', 'You must agree to the terms and conditions.');
+    //   return;
+    // }
 
-    Alert.alert('Success', 'Information verified successfully!');
+    // Alert.alert('Success', 'Information verified successfully!');
     router.push('/loginScreen4');
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="bg-white px-6 py-8">
-        {/* Header */}
+    // <SafeAreaView className="flex-1">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className='bg-white px-6 pt-16'>
+        
         <View className="flex-row items-center mt-4 mb-8">
           <TouchableOpacity>
             <Feather name="arrow-left" size={24} color="black" onPress={() => router.back()}/>
@@ -80,7 +80,7 @@ const ProfileConfirmationScreen = () => {
         <View className="mb-8">
           <Text className="text-lg text-gray-400">Username</Text>
           <TextInput
-            className="border-b border-gray-200 py-1 text-black"
+            className="border-b border-gray-200 py-2 text-black"
             value={username}
             onChangeText={setUsername}
             placeholder="Enter your username"
@@ -90,7 +90,7 @@ const ProfileConfirmationScreen = () => {
         <View className="mb-8">
           <Text className="text-lg text-gray-400">Email</Text>
           <TextInput
-            className="border-b border-gray-200 py-1 text-black"
+            className="border-b border-gray-200 py-2 text-black"
             value={email}
             onChangeText={setEmail}
             placeholder="Enter your email"
@@ -112,7 +112,7 @@ const ProfileConfirmationScreen = () => {
         <View className="mb-8">
           <Text className="text-lg text-gray-400">Gender</Text>
           <TextInput
-            className="border-b border-gray-200 py-1 text-black"
+            className="border-b border-gray-200 py-2 text-black"
             value={gender}
             onChangeText={setGender}
             placeholder="Enter your gender"
@@ -123,7 +123,7 @@ const ProfileConfirmationScreen = () => {
         <View className="mb-8">
           <Text className="text-lg text-gray-400">Date of Birth (Optional)</Text>
           <TextInput
-            className="border-b border-gray-200 py-1 text-black"
+            className="border-b border-gray-200 py-2 text-black"
             value={dateOfBirth}
             onChangeText={setDateOfBirth}
             placeholder="DD/MM/YYYY"
@@ -141,11 +141,12 @@ const ProfileConfirmationScreen = () => {
         </View>
         
         {/* Verify Button */}
-        <TouchableOpacity className="bg-blue-500 py-4 rounded-full items-center" onPress={handleVerify}>
-          <Text className="text-white font-semibold">Verify</Text>
-        </TouchableOpacity>
+        <View className='pb-20'>
+          <TouchableOpacity className="bg-blue-500 py-4 rounded-full items-center" onPress={handleVerify}>
+            <Text className="text-white font-semibold">Verify</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
-    </SafeAreaView>
   );
 };
 
