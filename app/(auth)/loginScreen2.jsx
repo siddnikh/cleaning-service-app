@@ -13,7 +13,7 @@ export default function loginScreen2() {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className='bg-white px-6 pt-10'>
+      <View className='bg-white h-full px-6 pt-10'>
       {/* Circle shape in the top right */}
       <View className="absolute top-[-20] right-[-40] w-40 h-40 rounded-full border-2 border-gray-200" />
 

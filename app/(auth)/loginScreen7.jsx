@@ -10,7 +10,7 @@ const ProfileConfirmationScreen = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [profileImage, setProfileImage] = useState(null);
   const [agree, setAgree] = useState(false);
   const [gender, setGender] = useState('');
@@ -25,7 +25,7 @@ const ProfileConfirmationScreen = () => {
     });
 
     if (!result.canceled) {
-      setProfileImage(result.uri);
+      setProfileImage(result.assets[0].uri);
     }
   };
 

@@ -24,8 +24,7 @@ const CreateProfileScreen = () => {
   };
 
   const handleCreatePin = () => {
-    // Logic to create a pin
-    Alert.alert('Success', 'Pin created successfully!');
+    router.push('/profilePin')
   };
 
   const handleWithoutPin = () => {

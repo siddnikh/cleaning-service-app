@@ -1,4 +1,4 @@
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SplashScreen, Stack } from 'expo-router'
 import { useEffect } from 'react';
@@ -7,9 +7,11 @@ SplashScreen.preventAutoHideAsync();
 
 const MainLayout = () => {
   useEffect(() => {
-    StatusBar.setBarStyle('dark-content');
-    StatusBar.setBackgroundColor('transparent');
-    StatusBar.setTranslucent(true);
+    {Platform.OS == 'android' && ( 
+      StatusBar.setTranslucent(true),
+      StatusBar.setBarStyle('dark-content'),
+      StatusBar.setBackgroundColor('transparent')
+  )}
   }, []);
   
   return (
@@ -18,6 +20,9 @@ const MainLayout = () => {
       <Stack>
         <Stack.Screen name="home" options={{ headerShown: false }} />
         <Stack.Screen name="settings" options={{ headerShown: false }} />
+        <Stack.Screen name="searchWithMap" options={{ headerShown: false }} />
+        <Stack.Screen name="searchWithFilter" options={{ headerShown: false }} />
+        <Stack.Screen name="FAQ" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
   )

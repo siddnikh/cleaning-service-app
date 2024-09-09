@@ -25,7 +25,7 @@ const InterestSelectionScreen = () => {
 
   const renderInterestItem = ({ item }) => (
     <TouchableOpacity
-      className={`w-44 h-44 bg-gray-200 rounded-lg m-2 relative ${
+      className={`w-40 h-40 bg-gray-200 rounded-lg m-2 relative ${
         selectedInterests.includes(item.id) ? 'border-2 border-[#1D51FE]' : ''
       }`}
       onPress={() => toggleInterest(item.id)}

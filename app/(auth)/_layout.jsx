@@ -1,4 +1,4 @@
-import { StyleSheet, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar, Platform } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SplashScreen, Stack } from 'expo-router'
 import { useEffect } from 'react';
@@ -7,9 +7,12 @@ SplashScreen.preventAutoHideAsync();
 
 const AuthLayout = () => {
   useEffect(() => {
-    StatusBar.setBarStyle('dark-content');
-    StatusBar.setBackgroundColor('transparent');
-    StatusBar.setTranslucent(true);
+    
+    {Platform.OS == 'android' && ( 
+      StatusBar.setTranslucent(true),
+      StatusBar.setBarStyle('dark-content'),
+      StatusBar.setBackgroundColor('transparent')
+  )}
   }, []);
   
   return (
@@ -25,6 +28,7 @@ const AuthLayout = () => {
         <Stack.Screen name="createProfile" options={{ headerShown: false }} />
         <Stack.Screen name="interestsPage" options={{ headerShown: false }} />
         <Stack.Screen name="signUp" options={{ headerShown: false }} />
+        <Stack.Screen name="profilePin" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
   )

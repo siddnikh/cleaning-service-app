@@ -48,6 +48,7 @@ const HomeScreen = () => {
         <TextInput
           placeholder="Search services"
           className="ml-2 p-1 flex-1 text-black"
+          onPress = { () => router.push('/searchWithMap')}
         />
       </View>
 
@@ -68,7 +69,7 @@ const HomeScreen = () => {
               <View className="flex-row items-center">
                 <View className="w-12 h-12 bg-gray-300 rounded-full mr-4"></View>
                 <View>
-                    <Text className="text-white pt-2 text-xl font-semibold">{washer.name}</Text>
+                    <Text className="text-white pt-2 text-xl font-semibold" onPress={() => router.push('/serviceDetails')}>{washer.name}</Text>
                     <Text className="text-white">{washer.providerName}</Text>
                 </View>
               </View>
@@ -117,7 +118,7 @@ const HomeScreen = () => {
             <View className="w-12 h-12 bg-gray-300 rounded-lg mr-4"></View>
             <View className="flex-1">
               <Text className="text-black font-semibold">{service.name}</Text>
-              <Text className="text-gray-500">{service.location}</Text>
+              <Text className="text-gray-500"><Feather name="map-pin" size={16} color="black" />{service.location}</Text>
               <Text className="text-yellow-500">{'⭐'.repeat(Math.round(service.reviews / 20))} Reviews ({service.reviews})</Text>
             </View>
           </View>
