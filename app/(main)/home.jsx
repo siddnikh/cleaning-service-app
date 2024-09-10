@@ -62,14 +62,15 @@ const HomeScreen = () => {
         </View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {topWashers.map((washer) => (
-            <View
+            <TouchableOpacity
               key={washer.id}
               className={`p-4 mx-2 rounded-3xl drop-shadow-xl border-2 border-black w-90 h-48 mr-4 ${washer.bgColor} justify-between`}
+              onPress={() => router.push('/serviceDetails')}
             >
               <View className="flex-row items-center">
                 <View className="w-12 h-12 bg-gray-300 rounded-full mr-4"></View>
                 <View>
-                    <Text className="text-white pt-2 text-xl font-semibold" onPress={() => router.push('/serviceDetails')}>{washer.name}</Text>
+                    <Text className="text-white pt-2 text-xl font-semibold">{washer.name}</Text>
                     <Text className="text-white">{washer.providerName}</Text>
                 </View>
               </View>
@@ -86,7 +87,7 @@ const HomeScreen = () => {
                     <Text className="text-white">{washer.location}</Text>
                     <Text className="text-white">`à partir de ${washer.price}`</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>

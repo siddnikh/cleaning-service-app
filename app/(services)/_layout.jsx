@@ -19,6 +19,7 @@ const MainLayout = () => {
       <StatusBar />
       <Stack>
         <Stack.Screen name="serviceDetails" options={{ headerShown: false }} />
+        <Stack.Screen name="booking" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
   )
