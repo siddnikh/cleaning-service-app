@@ -55,7 +55,7 @@ A sleek and modern mobile application developed for a freelance client to connec
 - Backend Repository: [Link to backend repo](https://github.com/siddnikh/cleaning-services-be)
 
 ## 📱 Checkout the app's video here:
-
+- [App Video](https://drive.google.com/file/d/1eBFJApuufAo1aqgYAQLIVNuLz_4KTcDD/view?usp=sharing)
 
 ## 📝 Notes
 
